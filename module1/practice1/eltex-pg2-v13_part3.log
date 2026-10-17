@@ -1,0 +1,64 @@
+cd ~
+touch "${USER}_part3.log"
+mkdir -p D1/D2/D3
+find D1 -type d
+D1
+D1/D2
+D1/D2/D3
+touch D1/D2/file.txt
+echo "Hello file.txt in D1/D2" > D1/D2/file.txt
+ln D1/D2/file.txt D1/D2/D3/file_hard.txt
+ln -s ../file.txt D1/D2/D3/file_symbol.txt
+ls -li D1/D2/file.txt D1/D2/D3/file_hard.txt D1/D2/D3/file_symbol.txt
+131199 -rw-r--r-- 2 eltex-pg2-v13 eltex-pg2-v13 24 Oct 13 21:12 D1/D2/D3/file_hard.txt
+131200 lrwxrwxrwx 1 eltex-pg2-v13 eltex-pg2-v13 11 Oct 13 21:15 D1/D2/D3/file_symbol.txt -> ../file.txt
+131199 -rw-r--r-- 2 eltex-pg2-v13 eltex-pg2-v13 24 Oct 13 21:12 D1/D2/file.txt
+cat D1/D2/D3/file_hard.txt
+Hello file.txt in D1/D2
+cat D1/D2/D3/file_symbol.txt
+Hello file.txt in D1/D2
+mv D1/D2/file.txt D1/file.txt
+cat D1/D2/D3/file_hard.txt
+Hello file.txt in D1/D2
+cat D1/D2/D3/file_symbol.txt
+cat: D1/D2/D3/file_symbol.txt: No such file or directory
+rm -r D1/D2
+find D1
+D1
+D1/file.txt
+find / -type f -size +20M 2>/dev/null > "$HOME/${USER}_part3_gt20M.log"
+du -h --apparent-size для найденных файлов
+31M	/usr/bin/x86_64-linux-gnu-lto-dump-12
+31M	/usr/lib/gcc/x86_64-linux-gnu/12/lto1
+32M	/usr/lib/gcc/x86_64-linux-gnu/12/cc1
+30M	/usr/lib/x86_64-linux-gnu/libicudata.so.72.1
+128T	/proc/kcore
+33M	/boot/initrd.img-6.1.0-44-amd64
+33M	/boot/initrd.img-6.1.0-50-amd64
+33M	/boot/initrd.img-6.1.0-53-amd64
+41M	/var/log/journal/8247b53b6ae84ae0ad9bb1c96113fd29/system@4f44ef78d53d4cd0a5555898b8d0015b-0000000000179b0c-000659e0105337c7.journal
+24M	/var/log/journal/8247b53b6ae84ae0ad9bb1c96113fd29/system@00065be42e22b64e-29e46ef12bfd5644.journal~
+42M	/var/log/journal/8247b53b6ae84ae0ad9bb1c96113fd29/system@4f44ef78d53d4cd0a5555898b8d0015b-000000000016aef5-0006585775bcfe03.journal
+32M	/var/log/journal/8247b53b6ae84ae0ad9bb1c96113fd29/system@00065b6e0461a953-e594878e03ffcfa9.journal~
+24M	/var/log/journal/8247b53b6ae84ae0ad9bb1c96113fd29/system@00065c4bf168df91-94a074e01b8fde49.journal~
+39M	/var/cache/apt/srcpkgcache.bin
+39M	/var/cache/apt/pkgcache.bin
+48M	/var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_binary-amd64_Packages
+49M	/var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_source_Sources
+32M	/var/lib/apt/lists/deb.debian.org_debian_dists_bookworm_main_i18n_Translation-en
+find ~ -type f -mmin -1440
+/home/eltex-pg2-v13/.lesshst
+/home/eltex-pg2-v13/D1/file.txt
+/home/eltex-pg2-v13/.bash_history
+/home/eltex-pg2-v13/eltex-pg2-v13_part.log
+/home/eltex-pg2-v13/eltex-pg2-v13_part3_gt20M.log
+/home/eltex-pg2-v13/eltex-pg2-v13_part3.log
+which find
+/usr/bin/find
+file "$(which find)"
+/usr/bin/find: ELF 64-bit LSB pie executable, x86-64, version 1 (SYSV), dynamically linked, interpreter /lib64/ld-linux-x86-64.so.2, BuildID[sha1]=5545a6c7162d325fbe5ffabcbfe4e5521b66ce70, for GNU/Linux 3.2.0, stripped
+file /boot/initrd.img*
+/boot/initrd.img-6.1.0-44-amd64: ASCII cpio archive (SVR4 with no CRC)
+/boot/initrd.img-6.1.0-50-amd64: ASCII cpio archive (SVR4 with no CRC)
+/boot/initrd.img-6.1.0-53-amd64: ASCII cpio archive (SVR4 with no CRC)
+
