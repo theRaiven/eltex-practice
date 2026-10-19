@@ -1,0 +1,220 @@
+$ git --version && gh --version
+git version 2.43.0
+Command 'gh' not found, but can be installed with:
+snap install gh  # version 2.6.0-15-g1a10fd5a, or
+apt  install gh  # version 2.45.0-1ubuntu0.3
+See 'snap info gh' for additional versions.
+$ apt update
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Hit:1 http://ru.archive.ubuntu.com/ubuntu noble InRelease
+Hit:2 http://ru.archive.ubuntu.com/ubuntu noble-updates InRelease
+Hit:3 http://ru.archive.ubuntu.com/ubuntu noble-backports InRelease
+Hit:4 http://security.ubuntu.com/ubuntu noble-security InRelease
+Reading package lists...
+Building dependency tree...
+Reading state information...
+88 packages can be upgraded. Run 'apt list --upgradable' to see them.
+$ apt install -y git gh
+
+WARNING: apt does not have a stable CLI interface. Use with caution in scripts.
+
+Reading package lists...
+Building dependency tree...
+Reading state information...
+git is already the newest version (1:2.43.0-1ubuntu7.3).
+git set to manually installed.
+The following NEW packages will be installed:
+  gh
+0 upgraded, 1 newly installed, 0 to remove and 88 not upgraded.
+Need to get 8,836 kB of archives.
+After this operation, 45.4 MB of additional disk space will be used.
+Get:1 http://ru.archive.ubuntu.com/ubuntu noble-updates/universe amd64 gh amd64 2.45.0-1ubuntu0.3 [8,836 kB]
+Fetched 8,836 kB in 1s (13.8 MB/s)
+Selecting previously unselected package gh.
+(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 125712 files and directories currently installed.)
+Preparing to unpack .../gh_2.45.0-1ubuntu0.3_amd64.deb ...
+Unpacking gh (2.45.0-1ubuntu0.3) ...
+Setting up gh (2.45.0-1ubuntu0.3) ...
+Processing triggers for man-db (2.12.0-4build2) ...
+
+Running kernel seems to be up-to-date.
+
+No services need to be restarted.
+
+No containers need to be restarted.
+
+No user sessions are running outdated binaries.
+
+No VM guests are running outdated hypervisor (qemu) binaries on this host.
+$ git --version && gh --version
+git version 2.43.0
+gh version 2.45.0 (2025-07-18 Ubuntu 2.45.0-1ubuntu0.3)
+https://github.com/cli/cli/releases/tag/v2.45.0
+$ git config --global user.name "theRaiven"
+$ git config --global user.email "esamap2@mail.ru"
+$ git config --global init.defaultBranch main
+$ git config --global --list
+user.name=theRaiven
+user.email=esamap2@mail.ru
+init.defaultbranch=main
+$ ssh-keygen -t ed25519 -f ~/.ssh/theRaiven_github -N ""
+Generating public/private ed25519 key pair.
+Your identification has been saved in /root/.ssh/theRaiven_github
+Your public key has been saved in /root/.ssh/theRaiven_github.pub
+The key fingerprint is:
+SHA256:f1LFH6lLMLhWpNeUwG+9vXSdv9I/XisuNdd4UdoDtLM root@eltex-practice2-pg2-v13
+The key's randomart image is:
++--[ED25519 256]--+
+|          .ooo.  |
+|          +.o+. o|
+|         o =.+==.|
+|          + o+==o|
+|        So  oE .X|
+|        .. ..oo=*|
+|          o o.=.=|
+|           + o ++|
+|            o.++=|
++----[SHA256]-----+
+$ ls -l ~/.ssh/theRaiven_github*
+-rw------- 1 root root 419 Oct 19 07:21 /root/.ssh/theRaiven_github
+-rw-r--r-- 1 root root 110 Oct 19 07:21 /root/.ssh/theRaiven_github.pub
+$ gh auth login
+$ gh auth status
+github.com
+  ✓ Logged in to github.com account theRaiven (/root/.config/gh/hosts.yml)
+  - Active account: true
+  - Git operations protocol: ssh
+  - Token: gho_************************************
+  - Token scopes: 'admin:public_key', 'gist', 'read:org', 'repo'
+$ gh auth setup-git --hostname github.com
+$ gh repo view theRaiven/eltex-practice
+name:	theRaiven/eltex-practice
+description:	Практические работы по курсу Eltex
+$ git clone git@github.com:theRaiven/eltex-practice.git ~/eltex-practice
+Cloning into '/root/eltex-practice'...
+Warning: Permanently added 'github.com' (ED25519) to the list of known hosts.
+git@github.com: Permission denied (publickey).
+fatal: Could not read from remote repository.
+
+Please make sure you have the correct access rights
+and the repository exists.
+$ echo 'Host github.com' >> ~/.ssh/config
+$ echo '    HostName github.com' >> ~/.ssh/config
+$ echo '    User git' >> ~/.ssh/config
+$ echo '    IdentityFile ~/.ssh/theRaiven_github' >> ~/.ssh/config
+$ echo '    IdentitiesOnly yes' >> ~/.ssh/config
+$ chmod 600 ~/.ssh/config
+$ ssh -T git@github.com
+Hi theRaiven! You've successfully authenticated, but GitHub does not provide shell access.
+$ rm -rf ~/eltex-practice
+$ git clone git@github.com:theRaiven/eltex-practice.git ~/eltex-practice
+Cloning into '/root/eltex-practice'...
+$ cd ~/eltex-practice && git status
+$ cd ~/eltex-practice && git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+$ find module1 -maxdepth 3 -print | sort
+module1
+module1/practice1
+module1/practice1/eltex-pg2-v13_part2.log
+module1/practice1/eltex-pg2-v13_part3_gt20M.log
+module1/practice1/eltex-pg2-v13_part3.log
+module1/practice1/model_1_part1.pdf
+module1/practice2
+module1/practice2/practice2_eltex-pg2-v13_part1.log
+$ cp /root/practice2_eltex-pg2-v13_part2.log ~/eltex-practice/module1/practice2/
+$ ls -lh module1/practice2
+total 128K
+-rw-r--r-- 1 root root 9.0K Oct 19 07:35 practice2_eltex-pg2-v13_part1.log
+-rw-r--r-- 1 root root 116K Oct 19 07:41 practice2_eltex-pg2-v13_part2.log
+$ git add module1/practice2/practice2_eltex-pg2-v13_part2.log
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+Changes to be committed:
+  (use "git restore --staged <file>..." to unstage)
+	new file:   module1/practice2/practice2_eltex-pg2-v13_part2.log
+
+$ git commit -m "Add practice 2 part 2 report"
+[main 2a45f11] Add practice 2 part 2 report
+ 1 file changed, 1252 insertions(+)
+ create mode 100644 module1/practice2/practice2_eltex-pg2-v13_part2.log
+$ git push origin main
+To github.com:theRaiven/eltex-practice.git
+   4310a54..2a45f11  main -> main
+$ mkdir ~/eltex-practice_clone
+$ cd ~/eltex-practice_clone
+$ git clone git@github.com:theRaiven/eltex-practice.git .
+Cloning into '.'...
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+$ cd ~/eltex-practice
+$ echo '# Practice 2' > module1/practice2/README.md
+$ git add module1/practice2/README.md
+$ git commit -m "Add practice 2 README"
+[main e3eed88] Add practice 2 README
+ 1 file changed, 1 insertion(+)
+ create mode 100644 module1/practice2/README.md
+$ git push origin main
+To github.com:theRaiven/eltex-practice.git
+   2a45f11..e3eed88  main -> main
+$ cd ~/eltex-practice_clone
+$ git fetch
+From github.com:theRaiven/eltex-practice
+   2a45f11..e3eed88  main       -> origin/main
+$ git log origin/main
+commit e3eed881ae7d2281b3244815eef25a4eb08501e6
+Author: theRaiven <esamap2@mail.ru>
+Date:   Mon Oct 19 07:49:11 2026 +0000
+
+    Add practice 2 README
+
+commit 2a45f110c06d2780917dcf4643dbbde0c88ccd4c
+Author: theRaiven <esamap2@mail.ru>
+Date:   Mon Oct 19 07:44:09 2026 +0000
+
+    Add practice 2 part 2 report
+
+commit 4310a54cec52a301a1e28fff952408331d6f5ead
+Author: theRaiven <esamap2@mail.ru>
+Date:   Mon Oct 19 14:12:14 2026 +0700
+
+    Add practice 2 part 1 report
+
+commit c98105223d9b78c6af63ebb0b7a3442b316788d5
+Author: theRaiven <esamap2@mail.ru>
+Date:   Sat Oct 17 10:32:32 2026 +0700
+
+    Add module 1 practices 1
+$ git diff main origin/main
+diff --git a/module1/practice2/README.md b/module1/practice2/README.md
+new file mode 100644
+index 0000000..35d7b53
+--- /dev/null
++++ b/module1/practice2/README.md
+@@ -0,0 +1 @@
++# Practice 2
+$ git merge origin/main
+Updating 2a45f11..e3eed88
+Fast-forward
+ module1/practice2/README.md | 1 +
+ 1 file changed, 1 insertion(+)
+ create mode 100644 module1/practice2/README.md
+$ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+$ cd ~/eltex-practice
+$ cp /root/practice2_eltex-pg2-v13_part3.log ~/eltex-practice/module1/practice2/
+$ git add module1/practice2/practice2_eltex-pg2-v13_part3.log
+$ git commit -m "Add practice 2 part 3 report"
+$ git push origin main
